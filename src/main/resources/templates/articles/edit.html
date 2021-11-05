@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update person</title>
+</head>
+<body>
+<p> Обновление информации по статье</p>
+
+<form th:method = "PATCH" th:action="@{/articles/{id}(id = ${article.getArticleId()})}" th:object = "${article}">
+
+    <label> Укажите тему статьи
+        <select th:field="*{articleGroup}">
+            <option th:each="arGr : ${article.articleGroups}" th:value="${arGr}" th:text="${arGr.getArticleGroupInRus()}">
+            </option>
+        </select>
+    </label>
+
+    </br>
+    <label for="articleHeader">Введите название статьи</label>
+    <input type = "text" th:field = "*{articleHeader}" id = "articleHeader">
+    </br>
+    <label for="articleText">Введите текст статьи</label>
+    <input type = "text" th:field = "*{articleText}" id = "articleText">
+    </br>
+    <input type = "submit" value = "Обновить">
+</form>
+
+</body>
+</html>

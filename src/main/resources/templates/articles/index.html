@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All articled</title>
+    <style type = text/css>
+        div.header
+
+    </style>
+</head>
+<body>
+<header> Новости  </header>
+
+
+
+<p> Последние новости:</p>
+
+<div th:each = "article : ${articles}">
+    <a th:href="@{articles/{id}(id =${article.getArticleId()})}" th:text="${article.getArticleHeader()}">article</a>
+</div>
+
+<p> </p>
+
+<a href="/articles/new"> Добавить еще одну статью</a>
+</body>
+</html>
