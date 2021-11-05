@@ -11,8 +11,18 @@
 <body>
 <header> Новости  </header>
 
+<form enctype="multipart/form-data" action="#" th:action="@{/articles}" th:object = "${article}">
+    <label> Вы можете указать темы для просмотра:
+        <select th:field="*{articleGroup}">
+            <option th:each="arGr : ${article.articleGroups}" th:value="${arGr}" th:text="${arGr.getArticleGroupInRus()}">
+            </option>
+        </select>
+    </label>
+    <input type = "submit" value = "Выбрать тему">
+</form>
 
-
+<a href="/articles"> Вернуться к списку всех статей </a>
+</br>
 <p> Последние новости:</p>
 
 <div th:each = "article : ${articles}">

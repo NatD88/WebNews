@@ -7,6 +7,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.deviatkina.webnews.dao.ArticleDAO;
 import ru.deviatkina.webnews.modells.Article;
+import ru.deviatkina.webnews.modells.ArticleGroup;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/articles")
@@ -25,8 +28,9 @@ public class NewsController {
     }
 */
     @GetMapping()
-    public String index(Model model) {
-        model.addAttribute("articles", articleDAO.index());
+    public String index(@ModelAttribute("article") Article article, Model model) {
+
+        model.addAttribute("articles", articleDAO.index(article.getArticleGroup()));
         return "articles/index";
     }
 

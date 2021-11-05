@@ -32,9 +32,22 @@ public class ArticleDAO {
        return articles;
    }
 */
-   public List<Article> index() {
-       return articles;
+   public List<Article> index(ArticleGroup selectedArticleGroup) {
+
+       if (selectedArticleGroup == null) {
+           return articles;
+       } else {
+           List<Article> selectedArticles = new ArrayList<>();
+           for (Article article : articles) {
+               if (article.getArticleGroup().getArticleGroupInRus().equals(selectedArticleGroup.getArticleGroupInRus())) {
+                   selectedArticles.add(article);
+               }
+           }
+           return selectedArticles;
+       }
    }
+
+
 
    public Article show(int articleID) {
        return articles.stream()
@@ -60,4 +73,5 @@ public class ArticleDAO {
    public void delete(int articleID) {
        articles.removeIf(article -> article.getArticleId() == articleID);
    }
+
 }
