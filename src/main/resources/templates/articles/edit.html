@@ -19,9 +19,11 @@
     </br>
     <label for="articleHeader">Введите название статьи</label>
     <input type = "text" th:field = "*{articleHeader}" id = "articleHeader">
+    <div th:if = "${#fields.hasErrors('articleHeader')}" th:errors = "*{articleHeader}"></div>
     </br>
     <label for="articleText">Введите текст статьи</label>
     <input type = "text" th:field = "*{articleText}" id = "articleText">
+    <div th:if = "${#fields.hasErrors('articleText')}" th:errors = "*{articleText}"></div>
     </br>
     <input type = "submit" value = "Обновить">
 </form>

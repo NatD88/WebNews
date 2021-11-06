@@ -5,8 +5,27 @@
     <title>Add article</title>
 </head>
 <body>
-<p> Добавь сюда свою статью</p>
+<p> Добавление новой статьи</p>
+<br>
+<p> Вы можете добавить статью двумя способами:</p>
+<ul>
+    <li>загрузить zip-архив и указать тему статьи</li>
+    <li>ввести тему, заголовок и текст статьи в соответствующие поля формы</li>
 
+</ul>
+<br>
+<p> Добавление новой статьи с помощью ZIP-архива</p>
+<br>
+<form action="../files/doUpload" method="post" enctype="multipart/form-data">
+    <label>Enter file</label>
+    <input type="file" name="file">
+    <button type="submit">Upload</button>
+</form>
+
+
+<br>
+<p> Добавление новой статьи через ввод всех данных</p>
+<br>
 <form th:method = "POST" th:action="@{/articles}" th:object = "${article}">
     <label> Укажите тему статьи
         <select th:field="*{articleGroup}">
@@ -15,12 +34,14 @@
         </select>
     </label>
 
-    </br>
+    <br>
     <label for="articleHeader">Введите название статьи</label>
     <input type = "text" th:field = "*{articleHeader}" id = "articleHeader">
-    </br>
+    <div th:if = "${#fields.hasErrors('articleHeader')}" th:errors = "*{articleHeader}"></div>
+    <br>
     <label for="articleText">Введите текст статьи</label>
     <input type = "text" th:field = "*{articleText}" id = "articleText">
+    <div th:if = "${#fields.hasErrors('articleText')}" th:errors = "*{articleText}"></div>
     <input type = "submit" value = "Сохранить">
 </form>
 

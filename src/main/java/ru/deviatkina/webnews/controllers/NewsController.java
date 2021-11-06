@@ -4,11 +4,13 @@ package ru.deviatkina.webnews.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.deviatkina.webnews.dao.ArticleDAO;
 import ru.deviatkina.webnews.modells.Article;
 import ru.deviatkina.webnews.modells.ArticleGroup;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -36,7 +38,7 @@ public class NewsController {
 
     @GetMapping("/{id}")
     public String showOneArticle(@PathVariable ("id") int id, Model model) {
-        model.addAttribute("article", articleDAO.show(id));
+        model.addAttribute("article", articleDAO.findArticleById(id));
         return "articles/show";
     }
 
@@ -49,23 +51,36 @@ public class NewsController {
         return "articles/new";
     }
 
+
+
     @PostMapping()
-    public String createNewArticle(@ModelAttribute("article") Article article) {
-        articleDAO.save(article);
-        return "redirect:/articles";
+    public String createNewArticle(@ModelAttribute("article") @Valid Article article, BindingResult bindingResult) {
+        if (bindingResult.hasErrors())
+            return "articles/new";
+        else {
+            articleDAO.save(article);
+            return "redirect:/articles";
+        }
     }
+
 
     @GetMapping("/{id}/edit")
     public String editArticle(Model model, @PathVariable("id") int id) {
-        model.addAttribute("article", articleDAO.show(id));
+        model.addAttribute("article", articleDAO.findArticleById(id));
         return "articles/edit";
 
     }
 
     @PostMapping("/{id}")  // тут должен быть Patch!!!
-    public String updateArticle(@ModelAttribute("article") Article article, @PathVariable("id") int id) {
-        articleDAO.update(id, article);
-        return "redirect:/articles";
+    public String updateArticle(@ModelAttribute("article") @Valid Article article,
+                                BindingResult bindingResult,
+                                @PathVariable("id") int id) {
+        if (bindingResult.hasErrors())
+            return "articles/edit";
+        else {
+            articleDAO.update(id, article);
+            return "redirect:/articles";
+        }
     }
 
     @PostMapping("/{id") // @DeleteMapping!!!!!!!!!!!!!!!!   и добавить фигурную скобку в параметр!!!!
@@ -73,35 +88,5 @@ public class NewsController {
         articleDAO.delete(id);
         return "redirect:/articles";
     }
-
-    /*
-    @GetMapping("/news/add")
-    public String addingNews(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
-        model.addAttribute("name", name);
-        return "addArticle";
-    }
-*/
-
-    /*
-        <select th:field="*{articleGroup}">
-        <option th:each="article : ${cities}"
-                th:value="${city.code}"
-                th:text="${city.city}">
-            Address
-        </option>
-    </select>
-     */
-
-    /*
-    <label> Укажите тему статьи
-        <select name = "articleGroup">
-            <option th:each="articleGroup : ${article.articleGroups}" th:text="${articleGroup.getArticleGroupInRus()}">
-            </option>
-
-        </select>
-    </label>
-
-
-     */
 
 }

@@ -12,7 +12,7 @@
 <header> Новости  </header>
 
 <form enctype="multipart/form-data" action="#" th:action="@{/articles}" th:object = "${article}">
-    <label> Вы можете указать темы для просмотра:
+    <label> Вы можете выбрать темы для просмотра:
         <select th:field="*{articleGroup}">
             <option th:each="arGr : ${article.articleGroups}" th:value="${arGr}" th:text="${arGr.getArticleGroupInRus()}">
             </option>
@@ -22,11 +22,23 @@
 </form>
 
 <a href="/articles"> Вернуться к списку всех статей </a>
-</br>
-<p> Последние новости:</p>
+<br>
 
+<p> Последние новости:</p>
+<!--
 <div th:each = "article : ${articles}">
-    <a th:href="@{articles/{id}(id =${article.getArticleId()})}" th:text="${article.getArticleHeader()}">article</a>
+    <a th:href="@{articles/{id}(id =${article.getArticleId()})}"
+       th:text="${article.getArticleHeader()}">article</a>
+</div>
+-->
+<div th:each="article : ${articles}">
+    <h3>
+    <a th:href="@{articles/{id}(id =${article.getArticleId()})}" th:text="${article.getArticleHeader()}"> </a>
+    </h3>
+    <!--  <div th:text="${article.getArticleHeader()}"></div> -->
+    <div th:text="${article.getArticleGroup().getArticleGroupInRus()}"></div>
+    <div th:text="${article.getArticleText()}"></div>
+    <br>
 </div>
 
 <p> </p>

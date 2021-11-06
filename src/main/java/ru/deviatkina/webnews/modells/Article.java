@@ -1,13 +1,22 @@
 package ru.deviatkina.webnews.modells;
 
 
+import ru.deviatkina.webnews.dao.ArticleDAO;
+
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+import java.util.*;
+
 public class Article {
+
     private int articleId;
     private ArticleGroup articleGroup;
+    @Size(min = 1, max = 300, message = "Заголовок статьи должен содержать от 1 до 300 символов")
     private String articleHeader;
+    @NotEmpty(message = "Текст статьи не должен быть пустым")
     private String articleText;
 
-    public ArticleGroup[] articleGroups = {ArticleGroup.ECONOMICS, ArticleGroup.POLITICS,
+    static public ArticleGroup[] articleGroups = {ArticleGroup.ECONOMICS, ArticleGroup.POLITICS,
             ArticleGroup.TRAVELING, ArticleGroup.SPORTS};
 
     public Article() {
@@ -53,4 +62,12 @@ public class Article {
     }
 
 
+    public static boolean checkArticleGroup (String group) {
+        Set<String> setOfGroups = new HashSet<>(Arrays.asList(
+                ArticleGroup.TRAVELING.getArticleGroupInRus(),
+                ArticleGroup.ECONOMICS.getArticleGroupInRus(),
+                ArticleGroup.POLITICS.getArticleGroupInRus(),
+                ArticleGroup.SPORTS.getArticleGroupInRus()));
+        return setOfGroups.contains(group);
+    }
 }

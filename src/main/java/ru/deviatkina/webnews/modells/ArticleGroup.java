@@ -1,5 +1,10 @@
 package ru.deviatkina.webnews.modells;
 
+import ru.deviatkina.webnews.dao.ArticleDAO;
+
+import java.util.EnumSet;
+import java.util.Set;
+
 public enum ArticleGroup {
     POLITICS("Политика"),
     ECONOMICS("Экономика"),
@@ -15,6 +20,8 @@ public enum ArticleGroup {
     public String getArticleGroupInRus() {
         return articleGroupInRus;
     }
+
+
 }
 
 
