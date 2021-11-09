@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.mock.web.MockMultipartFile;
-
 import ru.deviatkina.webnews.modells.ArticleGroup;
 import ru.deviatkina.webnews.service.ArticleStorageService;
 import ru.deviatkina.webnews.service.FileStorageService;
@@ -19,14 +18,12 @@ import java.util.Arrays;
 @SpringBootTest
 public class FileStorageServiceTest {
     @MockBean
- //   private ArticleDAO newArticleDAO;
     private ArticleStorageService articleStorageService;
 
     @Test
     public void testStore()  {
 
         FileStorageService fileStorageService = new FileStorageService(
-          //      newArticleDAO
                 articleStorageService);
         try  {
             assert (fileStorageService.store(new MockMultipartFile("article.zip", new FileInputStream("article.zip"))).equals("Статья успешно сохранена"));
@@ -39,6 +36,7 @@ public class FileStorageServiceTest {
             assert (fileStorageService.store(new MockMultipartFile("юра, марина.zip", new FileInputStream("юра, марина.zip"))).equals("Название zip-архива должно состоять из латинских букв, цифр, знака \"минус\"  и точки. \n " +
                     "Примеры названий: df.zip, sd-fsd.zip, vvv.zip, 12312.zip \n" +
                     "В названии не должно быть русских букв."));
+            assert (fileStorageService.store(new MockMultipartFile("srgsrg.zip", new FileInputStream("srgsrg.zip"))).equals("Ошибка распаковки архива. Файл внутри архива не должен содержать русских символов. Файл должен называться \"article.txt\""));
         } catch (Exception e) {
 
         }

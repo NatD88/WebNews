@@ -72,13 +72,12 @@ public class ArticleStorageService {
         //    searchingMap.put(ARTICLECOUNT, articles.getFirst());
     }
 
-    public Deque <Article> index(ArticleGroup selectedArticleGroup) {
+    public Deque<Article> index(ArticleGroup selectedArticleGroup) {
 
         if (selectedArticleGroup == null) {
             return articles;
-        }
-        else {
-            Deque <Article> selectedArticles = new ArrayDeque<>();
+        } else {
+            Deque<Article> selectedArticles = new ArrayDeque<>();
             for (Article article : articles) {
 
                 if (article.getArticleGroup().getArticleGroupInRus().equals(selectedArticleGroup.getArticleGroupInRus())) {
@@ -89,33 +88,27 @@ public class ArticleStorageService {
         }
     }
 
-    public Article findArticleById(int articleID) {
-        return articles.stream()
-                .filter(article -> article.getArticleId() ==articleID)
-                .findAny()
-                .orElse(null);
-    }
-
     public void save(Article article) {
         articles.addFirst(article);
-        //    searchingMap.put(ARTICLECOUNT, article);
     }
 
     public void create(String header, String groupString, String text) {
         Article newArticle = new Article();
         newArticle.setArticleHeader(header);
-        ArticleGroup articleGroup = null;
-        for (ArticleGroup oneArticleGroup : ArticleGroup.values()) {
-            if (oneArticleGroup.getArticleGroupInRus().equals(groupString)) {
-                articleGroup = oneArticleGroup;
-            }
-        }
+        ArticleGroup articleGroup = Article.transformStringGroupToEnumArticleGroup(groupString);
         newArticle.setArticleGroup(articleGroup);
         newArticle.setArticleText(text);
-
         articles.addFirst(newArticle);
         //    searchingMap.put(ARTICLECOUNT, newArticle);
     }
+/*
+    public Article findArticleById(int articleID) {
+        return articles.stream()
+                .filter(article -> article.getArticleId() == articleID)
+                .findAny()
+                .orElse(null);
+    }
+
 
     public void update(int articleId, Article updatedArticle) {
         Article articleToUpdate = findArticleById(articleId);
@@ -131,4 +124,5 @@ public class ArticleStorageService {
 
     }
 
+ */
 }
