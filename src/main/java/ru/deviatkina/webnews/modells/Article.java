@@ -1,15 +1,12 @@
 package ru.deviatkina.webnews.modells;
 
-
-import ru.deviatkina.webnews.dao.ArticleDAO;
-
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.*;
 
 public class Article {
-
-    private int articleId;
+    private static int ARTICLECOUNT;
+    private final int articleId = ++ARTICLECOUNT;
     private ArticleGroup articleGroup;
     @Size(min = 1, max = 300, message = "Заголовок статьи должен содержать от 1 до 300 символов")
     private String articleHeader;
@@ -22,8 +19,8 @@ public class Article {
     public Article() {
     }
 
-    public Article(int articleId, ArticleGroup articleGroup, String articleHeader, String articleText) {
-        this.articleId = articleId;
+    public Article(ArticleGroup articleGroup, String articleHeader, String articleText) {
+  //      this.articleId = ++ARTICLECOUNT;
         this.articleGroup = articleGroup;
         this.articleHeader = articleHeader;
         this.articleText = articleText;
@@ -32,11 +29,11 @@ public class Article {
     public int getArticleId() {
         return articleId;
     }
-
+/*
     public void setArticleId(int articleId) {
         this.articleId = articleId;
     }
-
+*/
     public ArticleGroup getArticleGroup() {
         return articleGroup;
     }

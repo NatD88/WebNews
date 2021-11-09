@@ -2,47 +2,69 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>All articled</title>
-    <style type = text/css>
-        div.header
-
-    </style>
+    <title>Все статьи</title>
+    <link href="/static/styles/site.css" th:href="@{styles/site.css}" rel="stylesheet" />
 </head>
 <body>
-<header> Новости  </header>
+<header>
+    <header>
+        <div id="desktopHeader">
+            <div id="Town">
+              Город Воронеж
+            </div>
 
-<form enctype="multipart/form-data" action="#" th:action="@{/articles}" th:object = "${article}">
-    <label> Вы можете выбрать темы для просмотра:
-        <select th:field="*{articleGroup}">
-            <option th:each="arGr : ${article.articleGroups}" th:value="${arGr}" th:text="${arGr.getArticleGroupInRus()}">
-            </option>
-        </select>
-    </label>
-    <input type = "submit" value = "Выбрать тему">
-</form>
-
-<a href="/articles"> Вернуться к списку всех статей </a>
-<br>
-
-<p> Последние новости:</p>
-<!--
-<div th:each = "article : ${articles}">
-    <a th:href="@{articles/{id}(id =${article.getArticleId()})}"
-       th:text="${article.getArticleHeader()}">article</a>
+            <div id="Contacts">
+                <div ID="telephone">
+                    &nbsp;  8-800-000-00-00
+                </div>
+            </div>
+        </div>
+        <div ID="headerInside">
+            <div ID="CompanyName"> Вести 36 </div>
+        </div>
+    </header>
+</header>
+<div id = "wrapper">
+<div id="selectionBar">
+    <form enctype="multipart/form-data" action="#" th:action="@{/articles}" th:object = "${article}">
+        <label> &nbsp; Вы можете выбрать темы для просмотра:
+            <select th:field="*{articleGroup}">
+                <option th:each="arGr : ${article.articleGroups}" th:value="${arGr}" th:text="${arGr.getArticleGroupInRus()}">
+                </option>
+            </select>
+        </label>
+        <input type = "submit" value = "Выбрать тему">
+    </form>
 </div>
--->
+<br>
+<br>
+<div id="toAllNews">
+<a   href="/articles"> Вернуться к списку всех статей </a>
+</div>
+
+<div id="addArticle">
+    <a href="/articles/new"> Добавить еще одну статью</a>
+</div>
+
+<h2 align="center">  Самые свежие новости:
+
+</h2>
+
+<div id="MainNavigation">
+
 <div th:each="article : ${articles}">
     <h3>
-    <a th:href="@{articles/{id}(id =${article.getArticleId()})}" th:text="${article.getArticleHeader()}"> </a>
+    <div th:text="${article.getArticleHeader()}"> </div>
     </h3>
-    <!--  <div th:text="${article.getArticleHeader()}"></div> -->
     <div th:text="${article.getArticleGroup().getArticleGroupInRus()}"></div>
+    <br>
     <div th:text="${article.getArticleText()}"></div>
     <br>
 </div>
-
+</div>
 <p> </p>
+</div>
 
-<a href="/articles/new"> Добавить еще одну статью</a>
+
 </body>
 </html>
