@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ошибка сохранения файла</title>
+    <link href="/static/styles/site.css" th:href="@{/styles/site.css}" rel="stylesheet" />
+    </head>
+    <body>
+    <header>
+        <header>
+            <div id="desktopHeader">
+                <div id="Town">
+                    Город Воронеж
+                </div>
+
+                <div id="Contacts">
+                    <div ID="telephone">
+                        &nbsp;  8-800-000-00-00
+                    </div>
+                </div>
+            </div>
+            <div ID="headerInside">
+
+                <div ID="CompanyName"> Вести 36 </div>
+            </div>
+        </header>
+    </header>
+    <div id="selectionBar">
+        <span id = "back">
+        <a href="/articles">  Вернуться к списку всех статей без добавления </a>
+        </span>
+    </div>
+    </div>
+    <div id="MainNavigation">
+        <P> <h3> Статья не сохранена! </h3></P>
+        <br><br>
+    <p th:text = "${message}"> </p>
+
+    <br>
+    <a href="/articles/new"> Попробовать добавить еще раз</a> <br><br>
+
+    </div>
+    </body>
+    </html>

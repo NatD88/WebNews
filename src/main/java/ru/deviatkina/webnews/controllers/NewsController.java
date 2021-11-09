@@ -4,9 +4,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import ru.deviatkina.webnews.dao.ArticleDAO;
 import ru.deviatkina.webnews.modells.Article;
-
+import ru.deviatkina.webnews.service.ArticleStorageService;
 import javax.validation.Valid;
 
 
@@ -14,16 +13,17 @@ import javax.validation.Valid;
 @RequestMapping("/articles")
 public class NewsController {
 
-    private final ArticleDAO articleDAO;
+    private final ArticleStorageService articleStorageService;
 
-    public NewsController(ArticleDAO articleDAO) {
-        this.articleDAO = articleDAO;
+    public NewsController(ArticleStorageService articleStorageService) {
+        this.articleStorageService = articleStorageService;
     }
 
     @GetMapping()
     public String index(@ModelAttribute("article") Article article, Model model) {
 
-        model.addAttribute("articles", articleDAO.index(article.getArticleGroup()));
+        model.addAttribute("articles",
+                articleStorageService.index(article.getArticleGroup()) );
         return "articles/index";
     }
 
@@ -39,7 +39,7 @@ public class NewsController {
         if (bindingResult.hasErrors())
             return "articles/new";
         else {
-            articleDAO.save(article);
+            articleStorageService.save(article);
             return "redirect:/articles";
         }
     }

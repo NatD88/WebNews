@@ -1,0 +1,138 @@
+@font-face{
+font-family: OpenSans-Light;
+Src: url(../fonts/OpenSans-Light.ttf);
+}
+html {
+	height: 100%;
+}
+
+body {
+        height: 100%;
+        padding: 0;
+        margin: 0;
+        font-family: OpenSans-Light, sans-serif;
+        color: #032149ff
+    }
+    header{
+        width:100%;
+        height: 170px;
+        padding: 10px 0;
+
+    }
+
+#wrapper {
+	min-height: 100%;
+
+	height: auto !important;
+
+	height: 100%;
+}
+
+
+    #desktopHeader {
+        width: 69%;
+        min-width: 700px;
+        max-width: 1200px;
+        height: 30px;
+        margin: 0 auto;
+        background: #968f7d;
+        font-size: 15px;
+        color: #032149;
+        padding: 0 auto;
+        line-height: 30px;
+        font-weight: bold;
+
+    }
+
+    #selectionBar {
+		width: 69%;
+        min-width: 700px;
+        max-width: 1200px;
+        height: 50px;
+		margin: 0 auto;
+		background: #968f7d;
+        font-size: 15px;
+        color: #032149;
+        line-height: 30px;
+        font-weight: bold;
+    }
+
+    #toAllNews
+    {	width: 69%;
+        min-width: 700px;
+        max-width: 1200px;
+        height: 50px;
+        margin: 0 auto;
+        font-size: 15px;
+        color: #032149;
+        padding: 0 auto;
+        line-height: 30px;
+        font-weight: bold;
+
+    }
+
+    #Town {
+        float: left;
+        margin-left: 15px;
+    }
+
+
+    #Contacts {
+        display: flex;
+        float: right;
+    }
+
+
+    #telephone {
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+
+    #headerInside {
+        width: 69%;
+        min-width: 700px;
+        max-width: 1200px;
+        height: 50px;
+        margin: 10px auto;
+
+    }
+
+    #CompanyName {
+        float: left;
+        margin-left: 20px;
+        font-size: 35px;
+        font-weight: bolder;
+        font-style: oblique;
+        line-height: 50px;
+        color: #032149;
+
+    }
+
+
+    #MainNavigation {
+		padding: 0 0 100px;
+        width: 69%;
+        min-width: 700px;
+        max-width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
+        align-items: center;
+    }
+
+#back{
+    margin: 15px;
+}
+
+    #addArticle{
+        width: 69%;
+        min-width: 700px;
+        max-width: 1200px;
+        height: 50px;
+        margin: 0 auto;
+        font-size: 15px;
+        color: #032149;
+        padding: 0 auto;
+        line-height: 30px;
+        font-weight: bold;
+    }
+

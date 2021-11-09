@@ -6,20 +6,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import ru.deviatkina.webnews.modells.Article;
 import ru.deviatkina.webnews.service.FileStorageService;
-import ru.deviatkina.webnews.service.StorageService;
 
 @Controller
 @RequestMapping("/files")
 public class FileUploadController {
 
-    private final StorageService storageService;
+    private final FileStorageService filestorageService;
 
     @Autowired
-    public FileUploadController(StorageService storageService) {
-        this.storageService = storageService;
+    public FileUploadController(FileStorageService filestorageService) {
+        this.filestorageService = filestorageService;
     }
 
 
@@ -27,7 +24,7 @@ public class FileUploadController {
     public String upload(@ModelAttribute("file")
                          @RequestParam MultipartFile file, Model model) {
 
-       String storeMessage = storageService.store(file);
+       String storeMessage = filestorageService.store(file);
        model.addAttribute("message", storeMessage);
         if (storeMessage.equals(FileStorageService.SUCCESS_STORE)) {
             return "redirect:/articles";

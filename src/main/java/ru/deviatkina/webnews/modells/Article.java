@@ -20,7 +20,7 @@ public class Article {
     }
 
     public Article(ArticleGroup articleGroup, String articleHeader, String articleText) {
-  //      this.articleId = ++ARTICLECOUNT;
+       // this.articleId = ++ARTICLECOUNT;
         this.articleGroup = articleGroup;
         this.articleHeader = articleHeader;
         this.articleText = articleText;
@@ -29,11 +29,7 @@ public class Article {
     public int getArticleId() {
         return articleId;
     }
-/*
-    public void setArticleId(int articleId) {
-        this.articleId = articleId;
-    }
-*/
+
     public ArticleGroup getArticleGroup() {
         return articleGroup;
     }

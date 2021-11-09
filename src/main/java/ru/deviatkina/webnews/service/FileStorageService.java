@@ -4,7 +4,6 @@ import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
-import ru.deviatkina.webnews.dao.ArticleDAO;
 import ru.deviatkina.webnews.modells.ArticleGroup;
 import java.io.*;
 import java.util.Arrays;
@@ -13,7 +12,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 @Component
-public class FileStorageService  implements  StorageService {
+public class FileStorageService {
 
     public static final String TEXT_FILE_NAME = "article.txt";
     public static final String FILE_EXTENTION = "zip";
@@ -35,12 +34,13 @@ public class FileStorageService  implements  StorageService {
     public static final String ZIP_FILE_CONTAINS_MORE_FILES = "Файл с архивом не должен содержать никаких других файлов, кроме \"article.txt\" ";
     public static final String EXCEPTION_STORE_MESSAGE = "Ошибка чтения из файла, статья не сохранена";
 
-    private final ArticleDAO articleDAO;
+
+    private final ArticleStorageService articleStorageService;
 
     @Autowired
-    public FileStorageService(ArticleDAO articleDAO) {
+    public FileStorageService(ArticleStorageService articleStorageService) {
 
-        this.articleDAO = articleDAO;
+          this.articleStorageService = articleStorageService;
     }
 
     public String store(MultipartFile file)  {
@@ -83,7 +83,7 @@ public class FileStorageService  implements  StorageService {
                 return TEXT_FILE_ONLY_ONE_LINE;
             }
 
-            if ( !ArticleDAO.checkArticleGroupDAO(group)) {
+            if ( !ArticleStorageService.checkArticleGroupDAO(group)) {
                 return INCORRECT_GROUP + Arrays.toString(ArticleGroup.values());
 
             }
@@ -103,7 +103,8 @@ public class FileStorageService  implements  StorageService {
                 return ZIP_FILE_CONTAINS_MORE_FILES;
             }
 
-            articleDAO.create(header, group, text.toString());
+            articleStorageService.create(header, group, text.toString());
+
         } catch (IOException e) {
             e.printStackTrace();
             return EXCEPTION_STORE_MESSAGE;
