@@ -4,8 +4,10 @@ import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
+import ru.deviatkina.webnews.modells.Article;
 import ru.deviatkina.webnews.modells.ArticleGroup;
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.zip.ZipEntry;
 
@@ -28,7 +30,7 @@ public class FileStorageService {
     public static final String TEXT_FILE_ONLY_ONE_LINE = "Файл \"article.txt\" содержит только одну строку. Этого не достаточно для сохранения статьи.\n" +
             "Формат файла: первая строка - заголовок, вторая строка - тема статьи, с третьей строки и далее - текст статьи";
     public static final String INCORRECT_GROUP = "Некорректно указан формат темы статьи. \n" +
-            "Допустимые значения: ";
+            "Допустимые значения: Политика, Путешествия, Спорт, Экономика";
     public static final String TEXT_FILE_ONLY_TWO_LINES = "Файл \"article.txt\" содержит только две строку. Этого не достаточно для сохранения статьи. \n" +
             "Формат файла: первая строка - заголовок, вторая строка - тема статьи, с третьей строки и далее - текст статьи";
     public static final String ZIP_FILE_CONTAINS_MORE_FILES = "Файл с архивом не должен содержать никаких других файлов, кроме \"article.txt\" ";
@@ -63,7 +65,7 @@ public class FileStorageService {
         String group;
         StringBuilder text;
         try (ZipInputStream stream = new ZipInputStream(file.getInputStream());
-             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(stream))) {
+             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8))) {
 
             // catches errors, when file name inside zip contains russian letters
             try {
@@ -88,8 +90,8 @@ public class FileStorageService {
                     return TEXT_FILE_ONLY_ONE_LINE;
                 }
 
-                if (!ArticleStorageService.checkArticleGroupDAO(group)) {
-                    return INCORRECT_GROUP + Arrays.toString(ArticleGroup.values());
+                if (!Article.checkArticleGroup(group)) {
+                    return INCORRECT_GROUP + " " + group;
 
                 }
 

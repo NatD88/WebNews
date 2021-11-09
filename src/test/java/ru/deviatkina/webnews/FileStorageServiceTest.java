@@ -1,7 +1,4 @@
 package ru.deviatkina.webnews;
-
-
-
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -9,10 +6,7 @@ import org.springframework.mock.web.MockMultipartFile;
 import ru.deviatkina.webnews.modells.ArticleGroup;
 import ru.deviatkina.webnews.service.ArticleStorageService;
 import ru.deviatkina.webnews.service.FileStorageService;
-
-
 import java.io.FileInputStream;
-
 import java.util.Arrays;
 
 @SpringBootTest

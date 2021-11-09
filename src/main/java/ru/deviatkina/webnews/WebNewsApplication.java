@@ -12,5 +12,4 @@ public class WebNewsApplication {
         SpringApplication.run(WebNewsApplication.class, args);
 
     }
-
 }

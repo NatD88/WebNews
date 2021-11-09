@@ -27,7 +27,7 @@
  </header>
  <div id="selectionBar">
      <span id = "back">
-     <a href="/articles">  Вернуться к списку всех статей без добавления </a>
+     <a href="../articles">  Вернуться к списку всех статей без добавления </a>
      </span>
  </div>
  </div>
@@ -65,7 +65,7 @@
          </select>
      </label>
 
-     <br>
+     <br><br>
      <label for="articleHeader">Введите название статьи</label>
      <input type = "text" th:field = "*{articleHeader}" id = "articleHeader">
      <div th:if = "${#fields.hasErrors('articleHeader')}" th:errors = "*{articleHeader}"></div>
@@ -77,7 +77,7 @@
      <input type = "submit" value = "Сохранить">
  </form>
          <br>
- <a href="/articles"> Вернуться к списку всех статей без добавления </a>
+
      </div>
 
  </body>
